@@ -20,7 +20,10 @@ export const Navbar = () => {
     const [extendNavbar, setExtendNavbar] = useState(false);
 
     return (
-    <NavbarContainer extendNavbar={extendNavbar}> 
+        // $extendNavbar ist nur der Name der Prop, die an das styled component übergeben wird.
+        // Die eigentliche Variable heißt extendNavbar und wird in den Klammern an die Navbar.style.js übergeben und ausgewertet.
+        // das $-Zeichen vor der Prop ist eine Konvention, um Props zu kennzeichnen, die speziell für styled-components verwendet werden.
+    <NavbarContainer $extendNavbar={extendNavbar}> 
         <NavbarInnerContainer>
             <LeftContainer>
                 <NavbarLogoLink to="/"><Image src={logo} /></NavbarLogoLink>

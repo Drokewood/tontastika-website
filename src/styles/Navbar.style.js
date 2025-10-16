@@ -10,7 +10,8 @@ export const NavbarInnerContainer = styled.div`
 export const NavbarContainer = styled.nav`
     position: fixed;
     width: 100%;
-    height: ${(props) => (props.extendNavbar ? "100vh" : "100px")};
+    /* props.$extendNavbar wird aus der Navbar.js übermittelt - dort sind weitere Informationen */
+    height: ${(props) => (props.$extendNavbar ? "100vh" : "100px")};
     background-color: ${({ theme }) => theme.colors.navbar};
     display: flex;
     flex-direction: column;
