@@ -27,7 +27,9 @@ export const Contract = () => {
                     </TextContainer>
                 
                     <PriceContainer>
+                        {/* bei Fragen, schau in die Contact.js! */}
                         {priceCardContent.map((item, index) => (
+                            // die Card.js ist nur der Bauplan, wie die Preiskarten aussehen sollen. Welche Daten dort reinkommen, wird hier festgelegt und übergeben.
                                 <Card key={index} item={item} /> 
                             ))}
                         {console.log("DATA", priceCardContent)}
@@ -36,7 +38,7 @@ export const Contract = () => {
                     <TextContainer>
                         <StyledContractText>
                             {textContent.map((item, index) => (
-                                    <div>
+                                    <div key={index}>
                                         <h1> {item.title} </h1>
                                         <p> {item.body} </p>
                                     </div>

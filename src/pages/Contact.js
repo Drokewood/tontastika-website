@@ -8,12 +8,17 @@ export const Contact = () => {
     return (
         <ContactContainer>
             <TextContainer>
+                {/*
+                 tosContent wird hier gemappt und jedes Item wird über seine eindeutige ID gemapt
+                 diese Id wird als Key jeweils einem Styledtext zugewiesen. die Komponenten innerhalb des StyledText (h1, ul, usw) haben nur noch auf dieses
+                 eine Item, mit seine eigenen Properties (title, body, etc.) Zugriff
+                */}
                 {tosContent.map((item) => (
-                    <StyledText>
+                    <StyledText key={item.id}>
                         <h1> {item.title} </h1>
                         
-                        {item.body.map((listItem) => (
-                            <ul>
+                        {item.body.map((listItem, index) => (
+                            <ul key={index}>
                                 <li>
                                     {listItem}
                                 </li>

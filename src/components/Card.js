@@ -33,8 +33,13 @@ export default function Card({ item: { title, smallTitle, price, list, body, ima
                         <PreisP>{price}</PreisP>
                     </MiddlePriceContainer>
                     <PriceListContainer>
-                    {list.map((item) => (
-                                <ul>
+                    {list.map((item, index) => (
+                        //wir übergeben hier ein item was an einen index im gebunden ist, um Fehler im browser, aufgrund von nicht eindeutigen keys zu vermeiden.
+
+                        // die Card.js ist nur der Bauplan, wie die Preiskarten aussehen sollen.
+                        // Welche Daten dort reinkommen, wird von der jeweiligen Page (z.B. Contract.js) bestimmt und übergeben.
+                        // LEGO-Pattern: Card.js = LEGO-Stein (Bauplan), Contract.js = LEGO-Bauwerk (nutzt viele Steine)
+                                <ul key={index}>
                                     <li>
                                         {item}
                                     </li>

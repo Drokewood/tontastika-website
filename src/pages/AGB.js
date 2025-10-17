@@ -6,8 +6,9 @@ export const AGB = () => {
         <AGBContainer>
             <AGBTextContainer>
             <h1> Datenschutz </h1>
+            {/* bei Fragen, schau in die Contact.js! */}
             {agbContent.map((item) => (
-                <StyleAGBText>
+                <StyleAGBText key={item.id}>
                     <h1> {item.title} </h1>
                     <p>
                         {item.body}
