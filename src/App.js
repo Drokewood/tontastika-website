@@ -9,6 +9,7 @@ import { Navbar } from './components/Navbar';
 import Footer from './components/Footer';
 import { Impressum } from './pages/Impressum';
 import { AGB } from './pages/AGB';
+import ScrollToTop from './components/ScrollToTop';
 
 
 const theme = {
@@ -26,6 +27,12 @@ function App() {
   return (
     <ThemeProvider theme = {theme}>
         <Router>
+          {/* die Scroll to Top Komponente wird an oberster Stelle innerhalb des Routers platziert,
+          sodass sie auf jede Routenänderung reagieren kann.
+          Die Komponenten innerhalb des Routers wird nacheinander gerendert.
+          Da die Komponente kein sichtbares UI rendert, beeinflusst sie das Layout der Seite nicht.
+          */}
+          <ScrollToTop />
           <Navbar />
             <Routes>
               <Route path='/' element={<Home />  }/>
