@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const ContractContainer = styled.div`
+export const TermsOfServiceContainer = styled.div`
     padding-top: 99px;
     width: 100%;
     display: flex;
@@ -30,7 +30,7 @@ export const TextContainer = styled.div`
 `
 
 
-export const StyledContractText = styled.div`
+export const StyledTermsOfServiceText = styled.div`
     width: 100%;
     height: auto;
     justify-content: center;

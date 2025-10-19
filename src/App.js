@@ -2,7 +2,7 @@ import './App.css';
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Home } from './pages/Home';
-import { Contract } from './pages/Contract';
+import { TermsOfService } from './pages/TermsOfService';
 import { Contact } from './pages/Contact';
 import { Error } from './pages/Error';
 import { Navbar } from './components/Navbar';
@@ -36,7 +36,7 @@ function App() {
           <Navbar />
             <Routes>
               <Route path='/' element={<Home />  }/>
-              <Route path='/contract' element={  <Contract /> }/>
+              <Route path='/tos' element={  <TermsOfService /> }/>
               <Route path='/contact' element={ <Contact /> }/>
               <Route path='/impressum' element={<Impressum />  }/>
               <Route path='/agb' element={<AGB />  }/>

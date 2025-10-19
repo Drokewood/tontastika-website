@@ -2,20 +2,20 @@ import priceCardContent from '../priceCardContent'
 import textContent from '../textContent';
 import Card from '../components/Card';
 import { 
-    ContractContainer,
+    TermsOfServiceContainer,
     PriceContainer,
     ContentContainer,
-    StyledContractText,
+    StyledTermsOfServiceText,
     TextContainer,
 
-} from '../styles/Contract.style'
+} from '../styles/TermsOfService.style'
 
-export const Contract = () => {
+export const TermsOfService = () => {
     return (
-        <ContractContainer>
+        <TermsOfServiceContainer>
                 <ContentContainer>
                     <TextContainer>
-                        <StyledContractText> 
+                        <StyledTermsOfServiceText> 
                             <h1> Preisübersicht </h1>
                             <p>
                                 Hier findest Du eine kleine Übersicht an Preisen für meine beliebtesten Angebote. Dein Wunsch ist nicht dabei?  
@@ -23,7 +23,7 @@ export const Contract = () => {
                                 Meine aktuelle To Do Liste findest du hier (externer Link). 
                                 Wichtig: Alle angegebenen Preise sind als Netto gekennzeichnet. Auf der Rechnung fallen noch zusätzlich 7% USt (Umsatzsteuer) an.
                             </p>
-                        </StyledContractText>
+                        </StyledTermsOfServiceText>
                     </TextContainer>
                 
                     <PriceContainer>
@@ -36,17 +36,17 @@ export const Contract = () => {
                     </PriceContainer>
 
                     <TextContainer>
-                        <StyledContractText>
+                        <StyledTermsOfServiceText>
                             {textContent.map((item, index) => (
                                     <div key={index}>
                                         <h1> {item.title} </h1>
                                         <p> {item.body} </p>
                                     </div>
                                 ))}
-                        </StyledContractText>
+                        </StyledTermsOfServiceText>
                     </TextContainer>
                 </ContentContainer>
-        </ContractContainer> 
+        </TermsOfServiceContainer> 
     )
 
 }
