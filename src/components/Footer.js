@@ -25,6 +25,7 @@ export default function Footer() {
                         <li> Career </li>
                         <li> <FooterLink to="/impressum"> Impressum </FooterLink> </li>
                         <li> <FooterLink to="/agb"> AGB </FooterLink> </li>
+                        <li> <FooterLink to="/tos"> Terms of Service </FooterLink> </li>
                     </ul>
                     <ul>
                         <SocialIcons  />
@@ -32,7 +33,7 @@ export default function Footer() {
 
                     
                 </Flex>
-                <p> &copy; Oktober 2023 Drokewood. All rights reserved </p>
+                <p> &copy; Oktober 2025 Drokewood. All rights reserved </p>
             </FooterContainer>
         </StyledFooter>
         
