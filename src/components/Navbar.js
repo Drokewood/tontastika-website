@@ -43,9 +43,11 @@ export const Navbar = () => {
         { extendNavbar &&
             (
                 <NavbarExtendedContainer>
-                    <NavbarLinkExtended to="/" > About </NavbarLinkExtended>
+                    <NavbarLinkExtended to="/" > Home </NavbarLinkExtended>
                     <NavbarLinkExtended to="/contact" > Kontakt </NavbarLinkExtended>
-                    <NavbarLinkExtended to="/contract" > Aufträge </NavbarLinkExtended>
+                    <NavbarLinkExtended to="/tos" > Terms of Service </NavbarLinkExtended>
+                    <NavbarLinkExtended to="/impressum" > Impressum </NavbarLinkExtended>
+                    <NavbarLinkExtended to="/agb" > AGB </NavbarLinkExtended>
                 </NavbarExtendedContainer>
             )
         }
