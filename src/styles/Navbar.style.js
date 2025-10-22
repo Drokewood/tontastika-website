@@ -114,7 +114,8 @@ export const NavbarLogoLink = styled(Link)`
 export const NavbarLinkExtended = styled(Link)`
     color: black;
     font-size: x-large;
-    font-family: Arial, Helvetica, sans-serif;
+    /* Custom Font: SageSans für moderne, cleane Navigation */
+    font-family: "SageSans", "Bosk", Arial, Helvetica, sans-serif;
     font-weight: bold;
     text-decoration: none;
     margin: 10px;
@@ -123,7 +124,8 @@ export const NavbarLinkExtended = styled(Link)`
 export const NavbarLink = styled(Link)`
     color: black;
     font-size: x-large;
-    font-family: Arial, Helvetica, sans-serif;
+    /* Custom Font: SageSans für moderne, cleane Navigation */
+    font-family: "SageSans", "Bosk", Arial, Helvetica, sans-serif;
     font-weight: bold;
     text-decoration: none;
     margin: 10px;
@@ -136,7 +138,8 @@ export const NavbarLink = styled(Link)`
 export const NavbarHomeLink = styled(Link)`
     color: #228B22;
     font-size: x-large;
-    font-family: Arial, Helvetica, sans-serif;
+    /* Custom Font: SageSans für moderne, cleane Navigation */
+    font-family: "SageSans", "Bosk", Arial, Helvetica, sans-serif;
     font-weight: bold;
     text-decoration: none;
     margin: 10px;
