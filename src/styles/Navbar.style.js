@@ -85,6 +85,12 @@ export const Image = styled.img`
     margin: 10px;
     width: auto;
     max-height: 80px;
+    
+    /* MOBILE LOGO SCALING: Kleiner Logo für bessere Burger Menu Sichtbarkeit */
+    @media (max-width: 800px) {
+        max-height: 60px;
+        margin: 5px;
+    }
 `
 
 export const RightContainer = styled.div`

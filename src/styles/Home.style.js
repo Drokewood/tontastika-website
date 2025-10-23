@@ -13,8 +13,20 @@ export const HomeContainer = styled.div`
 export const StyledHomeContainer = styled.div `
     align-items: center;
     justify-content: center;
-    width: 50%;
     height: auto;
+    width: 90%; 
+    // für den Desktop, damit nicht zu viel Platz genutzt wird
+    max-width: 800px;
+
+    // @media (min-width: 768px) bedeutet, dass die folgenden Styles nur angewendet werden, wenn die Bildschirmbreite mindestens 768 Pixel beträgt.
+    @media (min-width: 768px) {
+    // für Tablets und größere Mobile Bildschirme
+        width: 70%;
+    }
+
+    @media (min-width: 1200px) {
+    // für Desktops und größere Bildschirme
+        width: 50%;
 `
 
 export const HomeTextContainer = styled.div`
