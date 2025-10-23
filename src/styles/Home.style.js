@@ -8,6 +8,10 @@ export const HomeContainer = styled.div`
     justify-content: center;
     height: auto;
     background-color: #282c34;
+
+    @media (max-width: 420px) {
+        padding-top: 30px;
+    }
 `
 
 export const StyledHomeContainer = styled.div `
@@ -31,10 +35,11 @@ export const StyledHomeContainer = styled.div `
 
 export const HomeTextContainer = styled.div`
     width: 100%;
-    margin-top: 60px;
-    margin-left: 30px;
-    margin-right: 30px;
-    margin-bottom: 60px;
+    padding: 60px 30px;
+    
+    @media (max-width: 600px) {
+        padding: 60px 10px;  /* Weniger seitliches padding auf Mobile */
+    }
 `
 
 export const StyledHomeText = styled.div`
@@ -42,12 +47,30 @@ export const StyledHomeText = styled.div`
     height: auto;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    overflow: hidden; /* Debug: verhindert Überlauf */
     
     font-size: large;
 
     h1 {
         font-family: "PermanentMarker";
         color: #be6ded;
+        /* Debug: explizite h1 Begrenzung */
+        width: 100%;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        white-space: normal; /* erlaubt Zeilenumbruch */
+        word-wrap: break-word; /* bricht lange Wörter um */
+        
+        /* Mobile font-size reduction */
+        @media (max-width: 768px) {
+            font-size: 1.5rem; /* Kleinere Schrift für Tablets */
+        }
+        
+        @media (max-width: 480px) {
+            font-size: 1.2rem; /* Noch kleiner für Smartphones */
+        }
     }
 
     li {

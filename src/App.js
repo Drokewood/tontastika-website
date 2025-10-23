@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import { Impressum } from './pages/Impressum';
 import { AGB } from './pages/AGB';
 import ScrollToTop from './components/ScrollToTop';
+import GlobalStyle from './globalStyles';
 
 
 const theme = {
@@ -26,6 +27,8 @@ const theme = {
 function App() {
   return (
     <ThemeProvider theme = {theme}>
+        {/* GLOBAL STYLES: Box-Sizing für die GESAMTE App! */}
+        <GlobalStyle />
         <Router>
           {/* die Scroll to Top Komponente wird an oberster Stelle innerhalb des Routers platziert,
           sodass sie auf jede Routenänderung reagieren kann.
