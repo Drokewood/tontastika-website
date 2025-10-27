@@ -51,11 +51,22 @@ export const NavbarContainer = styled.nav`
     top: 0;
     left: 0;
     width: 100%;
-    /* props.$extendNavbar wird aus der Navbar.js übermittelt - dort sind weitere Informationen */
-    /* Wenn $extendNavbar true ist, wird die Höhe auf 100vh gesetzt, andernfalls auf 100px */
-    /* dieses Konstrukt wird Ternary Operator genannt, es handelt sich hier um eine if-else-Bedingung */
-    height: ${(props) => (props.$extendNavbar ? "100vh" : "100px")};
+    /* 
+    3-Stufen Responsive Height System:
+    - Ultra-Mobile (≤430px): Fullscreen möglich für echte Handys
+    - Tablet (431px-799px): Kompakt (100px) für Dropdown-Overlay
+    - Desktop (≥800px): Kompakt (100px) für Dropdown-Overlay
+    */
+    height: 100px;
     background-color: ${({ theme }) => theme.colors.navbar};
+
+    @media (max-width: 430px) {
+        /* props.$extendNavbar wird aus der Navbar.js übermittelt - dort sind weitere Informationen */
+        /* Wenn $extendNavbar true ist, wird die Höhe auf 100vh gesetzt, andernfalls auf 100px */
+        /* dieses Konstrukt wird Ternary Operator genannt, es handelt sich hier um eine if-else-Bedingung */
+        /* Nur auf Handys wird das Menu in einer Fullscreen variante geöffnet*/
+        height: ${(props) => (props.$extendNavbar ? "100vh" : "100px")};
+    }
     display: flex;
     flex-direction: column;
     /* Smooth height transition animation - schneller für bessere UX */
@@ -98,6 +109,7 @@ export const Image = styled.img`
 export const RightContainer = styled.div`
     display: flex;
     align-items: center;
+    position: relative; /* Für absolute positioning des Dropdown-Menüs */
     /* 
     TEIL DER LÖSUNG: Vereinfachtes Gap-basiertes Layout
     gap: 10px ersetzt komplexe margin-Berechnungen zwischen Navigations-Elementen
@@ -127,9 +139,29 @@ export const NavbarLinkExtended = styled(Link)`
     font-weight: bold;
     text-decoration: none;
     margin: 10px;
+    
+    /* Ultra-Mobile: Zentriertes Fullscreen-Verhalten (≤430px) */
+    @media (max-width: 430px) {
+        text-align: center;
+        width: 100%;
+    }
+    
+    /* Tablet & Desktop: Dropdown-Link-Styling (431px+) */
+    @media (min-width: 431px) {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 0;
+        text-align: left;
+        border-radius: 4px;
+        transition: background-color 0.2s ease;
+        
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    }
 `
 
-export const NavbarLink = styled(Link)`
+export const NavbarContactLink = styled(Link)`
     color: black;
     font-size: x-large;
     /* Custom Font: SageSans für moderne, cleane Navigation */
@@ -138,10 +170,14 @@ export const NavbarLink = styled(Link)`
     text-decoration: none;
     margin: 10px;
 
-    @media (max-width: 800px) {
+    /* 
+        "max-width: 600px" = "bis 600px und kleiner"
+    */
+    @media (max-width: 600px) {
         display: none;
     }
 `
+
 
 export const NavbarHomeLink = styled(Link)`
     color: #228B22;
@@ -152,7 +188,10 @@ export const NavbarHomeLink = styled(Link)`
     text-decoration: none;
     margin: 10px;
 
-    @media (max-width: 800px) {
+    /* 
+        "max-width: 600px" = "bis 600px und kleiner"
+    */
+    @media (max-width: 600px) {
         display: none;
     }
 `
@@ -189,30 +228,31 @@ export const OpenLinkButton = styled.button`
         transform: scale(0.95);
     }
     
-    /* 
-    PROBLEM GELÖST: Burger Menu Visibility Fix
-    Das Problem war, dass der Button in Firefox DevTools unsichtbar war
-    Lösung: space-between Layout in NavbarInnerContainer beseitigte Layout-Konflikte
-    
-    !important als defensive Absicherung - könnte theoretisch entfernt werden:
-    - screen and (min-width: 800px): versteckt Button auf Desktop  
-    - screen and (max-width: 799px): zeigt Button auf Mobile
-    - (pointer: coarse): zusätzliche Erkennung für Touch-Geräte
-    */
-    @media screen and (min-width: 800px) {
-        display: none !important;
-    }
-    
-    @media screen and (max-width: 799px), (pointer: coarse) {
-        display: flex !important;
-    }
+    display: flex;
 `
 export const NavbarExtendedContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* Slide animation für die Navbar-Links - schneller und smoother */
+    /* Slide animation für die Navbar-Links */
     animation: slideDown 0.2s ease-out;
+    
+    /* 
+        "min-width: 431px" = "ab 431px und größer"
+    */
+    @media (min-width: 431px) {
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background-color: beige;
+        border: 1px solid #ccc;
+        border-radius: 0 0 8px 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        min-width: 200px;
+        z-index: 99999;
+        align-items: flex-start;
+        padding: 10px 0;
+    }
     
     @keyframes slideDown {
         from {

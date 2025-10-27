@@ -8,7 +8,7 @@ import {
     NavbarInnerContainer,
     NavbarExtendedContainer,
     NavbarLinkContainer,
-    NavbarLink,
+    NavbarContactLink,
     Image,
     OpenLinkButton,
     NavbarLinkExtended,
@@ -29,15 +29,15 @@ export const Navbar = () => {
                 <NavbarLogoLink to="/"><Image src={logo} /></NavbarLogoLink>
             </LeftContainer>
             <RightContainer>
+                <NavbarLinkContainer>
+                    <NavbarHomeLink to="/" > Home </NavbarHomeLink>
+                    {/* <NavbarContactLink to="/contract" > Aufträge </NavbarContactLink> */}
+                    <NavbarContactLink to="/contact" > Kontakt </NavbarContactLink>
+                </NavbarLinkContainer>
                 {/* &#8801; = unicode icon id */}
                 <OpenLinkButton onClick={() => {
                     setExtendNavbar(!extendNavbar)
                 }}> {extendNavbar ? <> &#10005; </> : <> &#8801; </> } </OpenLinkButton>
-                <NavbarLinkContainer>
-                    <NavbarHomeLink to="/" > Home </NavbarHomeLink>
-                    {/* <NavbarLink to="/contract" > Aufträge </NavbarLink> */}
-                    <NavbarLink to="/contact" > Kontakt </NavbarLink>
-                </NavbarLinkContainer>
             </RightContainer>
         </NavbarInnerContainer>
         { extendNavbar &&
