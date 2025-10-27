@@ -52,12 +52,14 @@ export const NavbarContainer = styled.nav`
     left: 0;
     width: 100%;
     /* props.$extendNavbar wird aus der Navbar.js übermittelt - dort sind weitere Informationen */
+    /* Wenn $extendNavbar true ist, wird die Höhe auf 100vh gesetzt, andernfalls auf 100px */
+    /* dieses Konstrukt wird Ternary Operator genannt, es handelt sich hier um eine if-else-Bedingung */
     height: ${(props) => (props.$extendNavbar ? "100vh" : "100px")};
     background-color: ${({ theme }) => theme.colors.navbar};
     display: flex;
     flex-direction: column;
-    /* Smooth height transition animation */
-    transition: height 0.3s ease-in-out;
+    /* Smooth height transition animation - schneller für bessere UX */
+    transition: height 0.2s ease-in-out;
     /* moderner Schlagschatten */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     /* z-index: 1000 ist keine Pixelangabe, sondern eine CSS-priorisierungs-Eigenschaft, die das Element über andere Elemente legt und Scrollprobleme verhindert */
@@ -209,8 +211,8 @@ export const NavbarExtendedContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* Slide animation für die Navbar-Links - funktioniert aber noch nicht */
-    animation: slideDown 0.3s ease-out;
+    /* Slide animation für die Navbar-Links - schneller und smoother */
+    animation: slideDown 0.2s ease-out;
     
     @keyframes slideDown {
         from {

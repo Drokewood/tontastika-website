@@ -43,11 +43,11 @@ export const Navbar = () => {
         { extendNavbar &&
             (
                 <NavbarExtendedContainer>
-                    <NavbarLinkExtended to="/" > Home </NavbarLinkExtended>
-                    <NavbarLinkExtended to="/contact" > Kontakt </NavbarLinkExtended>
-                    <NavbarLinkExtended to="/tos" > Terms of Service </NavbarLinkExtended>
-                    <NavbarLinkExtended to="/impressum" > Impressum </NavbarLinkExtended>
-                    <NavbarLinkExtended to="/agb" > AGB </NavbarLinkExtended>
+                    <NavbarLinkExtended to="/" onClick={() => setExtendNavbar(false)} > Home </NavbarLinkExtended>
+                    <NavbarLinkExtended to="/contact" onClick={() => setExtendNavbar(false)} > Kontakt </NavbarLinkExtended>
+                    <NavbarLinkExtended to="/tos" onClick={() => setExtendNavbar(false)} > Terms of Service </NavbarLinkExtended>
+                    <NavbarLinkExtended to="/impressum" onClick={() => setExtendNavbar(false)} > Impressum </NavbarLinkExtended>
+                    <NavbarLinkExtended to="/agb" onClick={() => setExtendNavbar(false)} > AGB </NavbarLinkExtended>
                 </NavbarExtendedContainer>
             )
         }
