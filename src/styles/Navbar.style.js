@@ -244,7 +244,7 @@ export const NavbarExtendedContainer = styled.div`
         position: fixed;
         top: 100px;
         right: 20px;
-        background-color: beige;
+        background-color: ${({ theme }) => theme.colors.navbar};
         border: 1px solid #ccc;
         border-radius: 0 0 8px 8px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
