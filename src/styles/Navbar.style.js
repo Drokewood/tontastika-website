@@ -60,13 +60,6 @@ export const NavbarContainer = styled.nav`
     height: 100px;
     background-color: ${({ theme }) => theme.colors.navbar};
 
-    @media (max-width: 344px) {
-        /* props.$extendNavbar wird aus der Navbar.js übermittelt - dort sind weitere Informationen */
-        /* Wenn $extendNavbar true ist, wird die Höhe auf 100vh gesetzt, andernfalls auf 100px */
-        /* dieses Konstrukt wird Ternary Operator genannt, es handelt sich hier um eine if-else-Bedingung */
-        /* Nur auf Handys wird das Menu in einer Fullscreen variante geöffnet*/
-        height: ${(props) => (props.$extendNavbar ? "100vh" : "100px")};
-    }
     display: flex;
     flex-direction: column;
     /* Smooth height transition animation - schneller für bessere UX */
@@ -253,14 +246,20 @@ export const BurgerButtonIcon = styled.span`
 export const NavbarExtendedContainer = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
+    
     /* Slide animation für die Navbar-Links */
     animation: slideDown 0.2s ease-out;
+
+    @media (max-width: 430px) {
+        width: 100%;
+        right: 0px;
+
+    }
     
     /* 
-        "min-width: 345px" = "ab 345px und größer"
+        "min-width: 320px" = "ab 320px und größer"
     */
-    @media (min-width: 345px) {
+    @media (min-width: 320px) {
         position: fixed;
         top: 100px;
         right: 20px;
@@ -270,7 +269,6 @@ export const NavbarExtendedContainer = styled.div`
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         min-width: 200px;
         z-index: 99999;
-        align-items: flex-start;
         padding: 10px 0;
     }
     
