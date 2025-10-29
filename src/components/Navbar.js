@@ -11,6 +11,7 @@ import {
     NavbarContactLink,
     Image,
     OpenLinkButton,
+    BurgerButtonIcon,
     NavbarLinkExtended,
     NavbarLogoLink,
     NavbarHomeLink
@@ -35,9 +36,15 @@ export const Navbar = () => {
                     <NavbarContactLink to="/contact" > Kontakt </NavbarContactLink>
                 </NavbarLinkContainer>
                 {/* &#8801; = unicode icon id */}
+                {/* on click wird der Wert der extendNavbar umgekehrt */}
                 <OpenLinkButton onClick={() => {
                     setExtendNavbar(!extendNavbar)
-                }}> {extendNavbar ? <> &#10005; </> : <> &#8801; </> } </OpenLinkButton>
+                }}>
+                    {/* je nach wert, true oder false wird ein anderes Icon übergeben */}
+                    <BurgerButtonIcon $extendNavbar={extendNavbar}>
+                        {extendNavbar ? <span style={{fontSize: '28px'}}>&#10005;</span> : <>&#8801;</>}
+                    </BurgerButtonIcon>
+                </OpenLinkButton>
             </RightContainer>
         </NavbarInnerContainer>
         { extendNavbar &&

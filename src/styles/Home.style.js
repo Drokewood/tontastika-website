@@ -9,7 +9,7 @@ export const HomeContainer = styled.div`
     height: auto;
     background-color: #282c34;
 
-    @media (max-width: 420px) {
+    @media (max-width: 344px) {
         padding-top: 30px;
     }
 `
@@ -73,8 +73,8 @@ export const StyledHomeText = styled.div`
             font-size: 1.5rem; 
         }
         
-        @media (max-width: 480px) {
-            /* Noch kleiner für Smartphones */
+        @media (max-width: 344px) {
+            /* Noch kleiner für Smartphones & Foldables */
             font-size: 1.2rem; 
         }
     }

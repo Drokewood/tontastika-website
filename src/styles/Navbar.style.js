@@ -16,7 +16,7 @@ GELÖSTE PROBLEME:
    → Lösung: justify-content: space-between + gap-basiertes Layout
 
 NOCH ZU IMPLEMENTIEREN (siehe TODO):
-- 420px Ultra-Mobile Breakpoint (Text "zerreißen", Background-Probleme)
+- 344px Ultra-Mobile Breakpoint (Text "zerreißen", Background-Probleme) ✅ IMPLEMENTIERT
 - Custom Font Integration (PermanentMarker, SageSans, Bosk)
 - Animation Vervollständigung (slideDown, Hamburger Rotation)
 - Cross-Browser Testing auf echten Geräten
@@ -53,14 +53,14 @@ export const NavbarContainer = styled.nav`
     width: 100%;
     /* 
     3-Stufen Responsive Height System:
-    - Ultra-Mobile (≤430px): Fullscreen möglich für echte Handys
-    - Tablet (431px-799px): Kompakt (100px) für Dropdown-Overlay
+    - Ultra-Mobile (≤344px): Fullscreen möglich für echte Handys & Foldables
+    - Tablet (345px-799px): Kompakt (100px) für Dropdown-Overlay
     - Desktop (≥800px): Kompakt (100px) für Dropdown-Overlay
     */
     height: 100px;
     background-color: ${({ theme }) => theme.colors.navbar};
 
-    @media (max-width: 430px) {
+    @media (max-width: 344px) {
         /* props.$extendNavbar wird aus der Navbar.js übermittelt - dort sind weitere Informationen */
         /* Wenn $extendNavbar true ist, wird die Höhe auf 100vh gesetzt, andernfalls auf 100px */
         /* dieses Konstrukt wird Ternary Operator genannt, es handelt sich hier um eine if-else-Bedingung */
@@ -79,12 +79,13 @@ export const NavbarContainer = styled.nav`
     /* 
     PROBLEM GELÖST: Layout Overflow Prevention
     - overflow-x: hidden verhindert horizontales Scrollen
+    - overflow-y: hidden verhindert vertikalen Scrollbalken in der Navbar
     - max-width: 100vw stellt sicher, dass die Navbar nie breiter als der Viewport wird
     - box-sizing: border-box sorgt dafür, dass Padding in die Gesamtbreite eingerechnet wird
     Diese Kombination löst das Problem, dass Elemente außerhalb des sichtbaren Bereichs verschwanden
     */
     overflow-x: hidden;
-    overflow-y: visible;
+    overflow-y: hidden;
     max-width: 100vw;
     box-sizing: border-box;
 `;
@@ -140,14 +141,14 @@ export const NavbarLinkExtended = styled(Link)`
     text-decoration: none;
     margin: 10px;
     
-    /* Ultra-Mobile: Zentriertes Fullscreen-Verhalten (≤430px) */
-    @media (max-width: 430px) {
+    /* Ultra-Mobile: Zentriertes Fullscreen-Verhalten (≤344px) */
+    @media (max-width: 344px) {
         text-align: center;
         width: 100%;
     }
     
-    /* Tablet & Desktop: Dropdown-Link-Styling (431px+) */
-    @media (min-width: 431px) {
+    /* Tablet & Desktop: Dropdown-Link-Styling (345px+) */
+    @media (min-width: 345px) {
         width: 100%;
         padding: 12px 20px;
         margin: 0;
@@ -217,19 +218,38 @@ export const OpenLinkButton = styled.button`
     align-items: center;
     /* justify-content: center zentriert das Hamburger-Symbol horizontal im Button */
     justify-content: center;
+    transition: background-color 0.2s ease-in-out;
     
     /* & = "dieses Element" existiert nur in styled-components */
     &:hover {
         background-color: rgba(0, 0, 0, 0.05);
+        /* Nur Background-Scaling, keine Rotation */
         transform: scale(1.05);
     }
     
     &:active {
+        /* Nur Background-Scaling, keine Rotation */
         transform: scale(0.95);
     }
     
     display: flex;
 `
+
+export const BurgerButtonIcon = styled.span`
+    /* 
+    nimmt nur den Platz ein, den es braucht
+    ist aber weiter transformierbar (rotierbar)
+    */
+    display: inline-block;
+    /* 
+    Rotations Animation NUR für das Symbol
+    ease-in-out sorgt für sanfte Animation, startet langsam und wird schneller und endet langsam
+    */
+    transition: transform 0.2s ease-in-out;
+    /* Rotation Animation basierend auf extendNavbar State */
+    transform: ${(props) => (props.$extendNavbar ? "rotate(90deg)" : "rotate(0deg)")};
+`
+
 export const NavbarExtendedContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -238,9 +258,9 @@ export const NavbarExtendedContainer = styled.div`
     animation: slideDown 0.2s ease-out;
     
     /* 
-        "min-width: 431px" = "ab 431px und größer"
+        "min-width: 345px" = "ab 345px und größer"
     */
-    @media (min-width: 431px) {
+    @media (min-width: 345px) {
         position: fixed;
         top: 100px;
         right: 20px;
