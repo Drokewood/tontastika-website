@@ -1,4 +1,5 @@
 import { Header } from '../components/Header';
+import InstagramGallery from '../components/InstagramGallery';
 import { 
     HomeContainer,
     HomeTextContainer,
@@ -23,7 +24,7 @@ export const Home = () => {
                     </StyledHomeText>
                 </HomeTextContainer>
             
-                {/* Instagram Gallery will be added here later */}
+                <InstagramGallery />
             </StyledHomeContainer>
         </HomeContainer>
     </div>
