@@ -90,14 +90,6 @@ export const StyledHomeText = styled.div`
 
 `
 
-export const StyledInstaFeed = styled.div`
-    width: 100%;
-    height: auto;
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: center;
-    margin: 30px;
-`
 export const TestContainer = styled.div`
     width: 100%;
     display: flex;
