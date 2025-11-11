@@ -1,4 +1,5 @@
 import { Header } from '../components/Header';
+import HomeGallery from '../components/HomeGallery';
 import { 
     HomeContainer,
     HomeTextContainer,
@@ -21,17 +22,8 @@ export const Home = () => {
                     </StyledHomeText>
                 </HomeTextContainer>
             
-                {/* TODO: Homepage Gallery (9 Bilder) wird hier eingefügt */}
-                <div style={{
-                    padding: '40px 20px',
-                    textAlign: 'center',
-                    backgroundColor: '#f8f9fa',
-                    borderRadius: '8px',
-                    margin: '20px 0'
-                }}>
-                    <h3>🏺 Best-of Gallery kommt hier hin!</h3>
-                    <p>9 handverlesene Bilder der schönsten Tontastika-Arbeiten</p>
-                </div>
+                {/* Homepage Gallery mit 3 Placeholder-Bildern */}
+                <HomeGallery />
             </StyledHomeContainer>
         </HomeContainer>
     </div>
