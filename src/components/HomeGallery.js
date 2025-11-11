@@ -3,8 +3,11 @@ import {
     GalleryContainer, 
     GalleryTitle, 
     GalleryGrid, 
-    GalleryItem 
+    GalleryItem,
+    HomeImage
 } from '../styles/HomeGallery.style';
+import TestBild from '../assets/Otterloon.jpg';
+
 
 const HomeGallery = () => {
   return (
@@ -12,13 +15,13 @@ const HomeGallery = () => {
       <GalleryTitle>🏺 Tontastika Best-of Gallery</GalleryTitle>
       <GalleryGrid>
         <GalleryItem style={{backgroundColor: '#ffebee'}}>
-          Bild 1
+          <HomeImage src={TestBild} alt="Bild 1" />
         </GalleryItem>
         <GalleryItem style={{backgroundColor: '#e8f5e8'}}>
-          Bild 2
+          <HomeImage src={TestBild} alt="Bild 2" />
         </GalleryItem>
         <GalleryItem style={{backgroundColor: '#e3f2fd'}}>
-          Bild 3
+          <HomeImage src={TestBild} alt="Bild 3" />
         </GalleryItem>
       </GalleryGrid>
     </GalleryContainer>
