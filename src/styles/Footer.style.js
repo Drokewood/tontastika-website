@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 export const StyledFooter = styled.footer`
     background-color: ${({ theme }) => theme.colors.footer};
-    color: #fff;
+    color: ${({ theme }) => theme.colors.fontColor};
     padding: 10px 0px 10px;
     width: 100%;
 
@@ -35,7 +35,7 @@ export const FooterContainer = styled.div`
 `
 
 export const FooterLink = styled(Link)`
-    color: white;
+    color: ${({ theme }) => theme.colors.fontColor};
     font-size: x-large;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;

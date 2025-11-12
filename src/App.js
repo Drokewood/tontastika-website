@@ -23,12 +23,16 @@ import {
 
 const theme = {
   colors: {
-    footer: '#202329',
-    navbar: 'beige',
+    // Footer & Navbar: Deutlich dunklere Lila-Töne für bessere Abhebung
+    footer: '#d1c0e0', 
+    navbar: '#d1c0e0', 
     button: '#b750f2',
     buttonBackground: '#e7d8f0',
     pageBackground: '#f3e7f9', 
     fontColor: '#b750f2',
+    // Neue Schatten-Farben für bessere Sichtbarkeit auf hellem Hintergrund
+    shadowLight: 'rgba(183, 80, 242, 0.15)', 
+    shadowMedium: 'rgba(183, 80, 242, 0.25)', 
   }
 
 }

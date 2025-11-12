@@ -64,8 +64,7 @@ export const NavbarContainer = styled.nav`
     flex-direction: column;
     /* Smooth height transition animation - schneller für bessere UX */
     transition: height 0.2s ease-in-out;
-    /* moderner Schlagschatten */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px ${({ theme }) => theme.colors.shadowLight};
     /* z-index: 1000 ist keine Pixelangabe, sondern eine CSS-priorisierungs-Eigenschaft, die das Element über andere Elemente legt und Scrollprobleme verhindert */
     z-index: 1000;
     
@@ -126,7 +125,7 @@ export const NavbarLogoLink = styled(Link)`
 `
 
 export const NavbarLinkExtended = styled(Link)`
-    color: black;
+    color: ${({ theme }) => theme.colors.fontColor};
     font-size: x-large;
     /* Custom Font: SageSans für moderne, cleane Navigation */
     font-family: "SageSans", "Bosk", Arial, Helvetica, sans-serif;
@@ -156,7 +155,7 @@ export const NavbarLinkExtended = styled(Link)`
 `
 
 export const NavbarContactLink = styled(Link)`
-    color: black;
+    color: ${({ theme }) => theme.colors.fontColor};
     font-size: x-large;
     /* Custom Font: SageSans für moderne, cleane Navigation */
     font-family: "SageSans", "Bosk", Arial, Helvetica, sans-serif;
@@ -266,7 +265,7 @@ export const NavbarExtendedContainer = styled.div`
         background-color: ${({ theme }) => theme.colors.navbar};
         border: 1px solid #ccc;
         border-radius: 0 0 8px 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 12px ${({ theme }) => theme.colors.shadowMedium};
         min-width: 200px;
         z-index: 99999;
         padding: 10px 0;
