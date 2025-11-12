@@ -12,20 +12,20 @@ export const PriceInnerContainer = styled.div`
     display: block;
     overflow: hidden;
     position: relative;
-    transition: transform 0.6s;
+    transition: transform 1s ease-in-out;
     transform-style: preserve-3d;
-    transition: transform 1s;
+    cursor: pointer;
 
-
-    
-    &:hover {
-        /* die opacity regelt die transparenz der umgedrehten Karte, je niedriger der Wert, desto transparenter wird die Karte dargestellt */
+    /* Flipped state - wird durch JavaScript gesteuert, und in der Card.js ausgelöst */
+    &.flipped {
         opacity: 0.9;
-        /* die Scale gibt die vergrößerung, also die Hervorherbung der Karte nach der Drehung an  --  die rotateY gibt die weite der rotation in der Y-Achse an, also wie weit die Karte gedreht wird */
         transform: scale(1.05) rotateY(180deg);
-        /* der pointer legt das Aussehen des Cursers fest, damit dieser nochmal hervorgehoben wird */
-        cursor: pointer;
-        box-shadow: 10px 5px 30px 10px ;
+        box-shadow: 10px 5px 30px 10px;
+    }
+
+    /* Subtle hover effect nur für Feedback */
+    &:hover:not(.flipped) {
+        transform: scale(1.02);
     }
     
     `
@@ -36,7 +36,7 @@ export const FrontContainer = styled.div`
     width: 100%;
     height: 100%;
 
-    ${PriceInnerContainer}:hover & {
+    ${PriceInnerContainer}.flipped & {
         visibility: hidden;
     }
     
@@ -48,7 +48,7 @@ export const BackContainer = styled.div`
     height: 100%;
     visibility: hidden;
 
-    ${PriceInnerContainer}:hover & {
+    ${PriceInnerContainer}.flipped & {
         transform: rotateY(180deg);
         visibility: visible;
     }

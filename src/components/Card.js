@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { PriceInnerContainer,
     HeadlinePriceContainer,
     FrontContainer, 
@@ -16,8 +17,30 @@ import { PriceInnerContainer,
 
 
 export default function Card({ item: { title, smallTitle, price, list, body, image } }) {
+    const [isFlipped, setIsFlipped] = useState(false);
+    const [isAnimating, setIsAnimating] = useState(false);
+
+    const handleCardClick = () => {
+        // Animation Lock: Verhindert Klicks während Animation läuft
+        if (isAnimating) return;
+        
+        setIsAnimating(true);
+        setIsFlipped(!isFlipped);
+        
+        // Animation Lock für 1.5 Sekunden (1s Animation + 0.5s Pause)
+        setTimeout(() => {
+            setIsAnimating(false);
+        }, 1500);
+    };
+
     return (
-        <PriceInnerContainer>
+        <PriceInnerContainer 
+        // der classname dient als css Steuerung, das "flipped" wird an die Card.style.js übergeben, wo der Flip-Effekt definiert ist.
+        // der name "flipped" muss also mit dem Wert in der Card.style.js übereinstimmen, damit das Event gefunden werden kann.
+            className={isFlipped ? 'flipped' : ''} 
+            onClick={handleCardClick}
+            style={{ cursor: isAnimating ? 'wait' : 'pointer' }}
+        >
             
             <FrontContainer>
                 <TopStyleContainer>
