@@ -26,7 +26,9 @@ const theme = {
     footer: '#202329',
     navbar: 'beige',
     button: '#b750f2',
-    buttonBackground: '#e7d8f0'
+    buttonBackground: '#e7d8f0',
+    pageBackground: '#f3e7f9', 
+    fontColor: '#b750f2',
   }
 
 }
@@ -34,6 +36,7 @@ const theme = {
 
 function App() {
   return (
+    // das Themeprovider umschließt die gesamte App und stellt das Theme für alle Komponenten bereit, sodass wir keine separaten Imports in jeder Komponente brauchen.
     <ThemeProvider theme = {theme}>
         {/* GLOBAL STYLES: Box-Sizing für die GESAMTE App! */}
         <GlobalStyle />

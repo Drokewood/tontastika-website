@@ -7,8 +7,8 @@ export const AGBContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #282c34;
-    color: white;
+    background-color: ${props => props.theme.colors.pageBackground};
+    color: ${props => props.theme.colors.fontColor};
 `
 export const AGBTextContainer = styled.div`
     width: 50%;
@@ -29,10 +29,12 @@ export const StyleAGBText = styled.div`
     
     li {
         font-family: "sagesans";
+        color: ${props => props.theme.colors.fontColor};
     }
 
     p {
         font-family: "sagesans";
+        color: ${props => props.theme.colors.fontColor};
     }
 
 `

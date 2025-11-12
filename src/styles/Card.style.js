@@ -91,8 +91,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 background-color: #b750f2;
-font-family: "PermanentMarker";
-/* hier fehlt eine Schrift!------------------------------------------------------------------- */
+font-family: "PermanentMarker", cursive, sans-serif;
 `
 
 export const PriceListContainer = styled.div`

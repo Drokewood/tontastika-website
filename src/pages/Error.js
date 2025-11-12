@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom'
+import { useTheme } from 'styled-components'
 
 export const Error = () => {
+    const theme = useTheme();
     return (
         <div style={{ 
             paddingTop: '150px', 
             textAlign: 'center', 
-            backgroundColor: '#282c34', 
-            color: 'white', 
+            backgroundColor: theme.colors.pageBackground, 
+            color: theme.colors.fontColor, 
             minHeight: '100vh',
             fontFamily: 'sagesans'
         }}>

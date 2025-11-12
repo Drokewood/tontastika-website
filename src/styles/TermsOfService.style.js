@@ -7,7 +7,7 @@ export const TermsOfServiceContainer = styled.div`
     align-items: center;
     justify-content: center;
     height: auto;
-    background-color: #282c34;
+    background-color: ${props => props.theme.colors.pageBackground};
 `
 
 
@@ -42,16 +42,17 @@ export const StyledTermsOfServiceText = styled.div`
 
     h1 {
         font-family: "PermanentMarker";
-        color: #be6ded;
+        color: ${props => props.theme.colors.fontColor};
     }
 
     li {
         font-family: "sagesans";
+        color: ${props => props.theme.colors.fontColor};
     }
 
     p {
         font-family: "sagesans";
-        color: white;
+        color: ${props => props.theme.colors.fontColor};
     }
 
 `

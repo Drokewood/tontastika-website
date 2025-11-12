@@ -7,15 +7,15 @@ export const ImpressumContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #282c34;
-    color: white;
+    background-color: ${props => props.theme.colors.pageBackground};
+    color: ${props => props.theme.colors.fontColor};
 `
 export const ImpressumTextContainer = styled.div`
     width: 50%;
 
     h1 {
         font-family: "PermanentMarker";
-        color: #be6ded;
+        color: ${props => props.theme.colors.fontColor};
     }
 `
 
@@ -27,12 +27,15 @@ export const StyledImpressumText = styled.div`
     margin-top: 60px;
     font-size: large;
     
+    
     li {
         font-family: "sagesans";
+        color: ${props => props.theme.colors.fontColor};
     }
 
     p {
         font-family: "sagesans";
+        color: ${props => props.theme.colors.fontColor};
     }
 
 `
