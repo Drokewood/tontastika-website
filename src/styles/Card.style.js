@@ -12,7 +12,7 @@ export const PriceInnerContainer = styled.div`
     display: block;
     overflow: hidden;
     position: relative;
-    transition: transform 1s ease-in-out;
+    transition: transform 0.6s ease-in-out;
     transform-style: preserve-3d;
     cursor: pointer;
 
@@ -36,7 +36,7 @@ export const FrontContainer = styled.div`
     width: 100%;
     height: 100%;
 
-    ${PriceInnerContainer}.flipped & {
+    ${PriceInnerContainer}.show-back & {
         visibility: hidden;
     }
     
@@ -48,7 +48,7 @@ export const BackContainer = styled.div`
     height: 100%;
     visibility: hidden;
 
-    ${PriceInnerContainer}.flipped & {
+    ${PriceInnerContainer}.show-back & {
         transform: rotateY(180deg);
         visibility: visible;
     }

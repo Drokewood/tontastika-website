@@ -18,6 +18,7 @@ import { PriceInnerContainer,
 
 export default function Card({ item: { title, smallTitle, price, list, body, image } }) {
     const [isFlipped, setIsFlipped] = useState(false);
+    const [showBackContent, setShowBackContent] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
 
     const handleCardClick = () => {
@@ -25,19 +26,32 @@ export default function Card({ item: { title, smallTitle, price, list, body, ima
         if (isAnimating) return;
         
         setIsAnimating(true);
-        setIsFlipped(!isFlipped);
         
-        // Animation Lock für 1.5 Sekunden (1s Animation + 0.5s Pause)
+        if (!isFlipped) {
+            // Flip to back: Animation starten, dann Inhalt nach 300ms wechseln
+            setIsFlipped(true);
+            setTimeout(() => {
+                setShowBackContent(true);
+            }, 300);
+        } else {
+            // Flip to front: Animation starten, dann Inhalt nach 300ms wechseln
+            setIsFlipped(false);
+            setTimeout(() => {
+                setShowBackContent(false);
+            }, 300);
+        }
+        
+        // Animation Lock für 300ms verhindert schnelles Klicken und damit verbundenes Flackern
         setTimeout(() => {
             setIsAnimating(false);
-        }, 1500);
+        }, 300);
     };
 
     return (
         <PriceInnerContainer 
         // der classname dient als css Steuerung, das "flipped" wird an die Card.style.js übergeben, wo der Flip-Effekt definiert ist.
         // der name "flipped" muss also mit dem Wert in der Card.style.js übereinstimmen, damit das Event gefunden werden kann.
-            className={isFlipped ? 'flipped' : ''} 
+            className={`${isFlipped ? 'flipped' : ''} ${showBackContent ? 'show-back' : 'show-front'}`}
             onClick={handleCardClick}
             style={{ cursor: isAnimating ? 'wait' : 'pointer' }}
         >
