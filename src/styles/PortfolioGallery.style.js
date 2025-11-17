@@ -1,0 +1,65 @@
+import styled from "styled-components";
+
+export const PortfolioGalleryContainer = styled.div`
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #f3e7f9 0%, #e8d5f2 100%);
+  border-radius: 12px;
+`
+
+export const PortfolioGalleryTitle = styled.h2`
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+`
+
+export const PortfolioGalleryGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+`
+
+export const PortfolioGalleryItem = styled.div`
+  aspect-ratio: 1;
+  background: #f8f9fa;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6c757d;
+  font-size: 0.9rem;
+  border: 2px dashed #dee2e6;
+  /* erzeugt ein Hand Symbol, um anklickbare Inhalte zu kennzeichnen */
+  cursor: pointer;
+  /* ease = sanfte animation startet langsam-wird schneller-endet langsam, 0.3 = Zeit in der die Animation abläuft, all = alle Eigenschaften (wie transform, box-shadow, border-color) */
+  transition: all 0.3s ease;
+  overflow: hidden;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    border-color: #b750f2;
+  }
+`
+
+export const PortfolioImage = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+`
