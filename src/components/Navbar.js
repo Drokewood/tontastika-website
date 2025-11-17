@@ -55,6 +55,7 @@ export const Navbar = () => {
                     <NavbarLinkExtended to="/tos" onClick={() => setExtendNavbar(false)} > Terms of Service </NavbarLinkExtended>
                     <NavbarLinkExtended to="/impressum" onClick={() => setExtendNavbar(false)} > Impressum </NavbarLinkExtended>
                     <NavbarLinkExtended to="/agb" onClick={() => setExtendNavbar(false)} > AGB </NavbarLinkExtended>
+                    <NavbarLinkExtended to="/portfolio" onClick={() => setExtendNavbar(false)} > Portfolio </NavbarLinkExtended>
                 </NavbarExtendedContainer>
             )
         }

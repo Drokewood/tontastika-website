@@ -11,6 +11,7 @@ import { Impressum } from './pages/Impressum';
 import { AGB } from './pages/AGB';
 import ScrollToTop from './components/ScrollToTop';
 import GlobalStyle from './globalStyles';
+import { Portfolio } from './pages/Portfolio';
 
 // Import für Burger Menu Preloading - ALLE Styled Components
 import { 
@@ -55,6 +56,7 @@ function App() {
           <Contact />
           <Impressum />
           <AGB />
+          <Portfolio />
         </div>
         
         <Router>
@@ -79,6 +81,7 @@ function App() {
               <NavbarLinkExtended to="/tos">Terms of Service</NavbarLinkExtended>
               <NavbarLinkExtended to="/impressum">Impressum</NavbarLinkExtended>
               <NavbarLinkExtended to="/agb">AGB</NavbarLinkExtended>
+              <NavbarLinkExtended to="/portfolio">Portfolio</NavbarLinkExtended>
             </NavbarExtendedContainer>
             {/*
             die Burger Button Componente wird auch preloaded
@@ -106,6 +109,7 @@ function App() {
               <Route path='/contact' element={ <Contact /> }/>
               <Route path='/impressum' element={<Impressum />  }/>
               <Route path='/agb' element={<AGB />  }/>
+              <Route path='/portfolio' element={<Portfolio />  }/>
               {/* 
               Wildcard Route MUSS als letzte stehen! Fängt alle nicht-definierten URLs ab und zeigt Error-Page
               die Version von Router Dom ist schlau genug, die Routen auch außerhalb der Reihenfolge zu prüfen, wie sie definiert sind.
