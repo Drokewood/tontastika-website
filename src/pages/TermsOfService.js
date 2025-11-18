@@ -1,5 +1,5 @@
-import priceCardContent from '../priceCardContent'
-import textContent from '../textContent';
+import priceCardContent from '../data/content/priceCardContent'
+import textContent from '../data/content/textContent';
 import Card from '../components/Card';
 import { 
     TermsOfServiceContainer,

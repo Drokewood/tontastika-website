@@ -6,6 +6,50 @@ Zentrale Sammlung aller gelernten Code-Konzepte mit Examples - nie wieder 3 Tage
 
 ---
 
+## 🧠 ADS-OPTIMIZED CODING & MENTAL HEALTH
+
+### Sustainable Development Practices
+```
+⚡ REALISTIC PROFI-DEVELOPER HOURS:
+- Junior Dev: 2-4 hours actual coding per day
+- Senior Dev: 1-3 hours actual coding per day (!)
+- Rest: Meetings, code reviews, debugging, planning, documentation
+
+🎯 ADS-OPTIMIZED SESSIONS:
+- Short, focused coding blocks (1-2 hours)
+- Clear, achievable goals per session
+- Regular breaks to prevent overwhelm
+- Pair programming for accountability
+
+🛡️ BURNOUT PREVENTION:
+- Recognize euphoria as potential warning sign
+- "Too much enthusiasm" can lead to scope creep
+- Set boundaries: finish one project before starting another
+- Weekend breaks are NECESSARY, not optional
+
+💪 MOMENTUM vs SUSTAINABILITY:
+- Quality > Quantity in coding time
+- Consistent small wins build confidence
+- Celebrate progress, no matter how small
+- Trust the process - sustainable pace wins long-term
+```
+
+### Project Management Philosophy
+```
+🎯 FOCUS STRATEGY:
+1. Complete current project (Tontastika)
+2. Move to next logical evolution (Cocktail App with Next.js + AI)
+3. THEN experiment with additional languages/projects
+
+⚠️ SCOPE CREEP PREVENTION:
+- Recognize "too many ideas at once" pattern
+- One main project at a time
+- Document future ideas but don't start them
+- Euphoria can be dangerous - channel it wisely
+```
+
+---
+
 ## 🎨 **CSS**
 
 ### **📏 SPACING & UNITS**

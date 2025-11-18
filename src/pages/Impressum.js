@@ -1,4 +1,4 @@
-import impressumContent from "../impressumContent";
+import impressumContent from "../data/content/impressumContent";
 import { ImpressumContainer, ImpressumTextContainer, StyledImpressumText } from '../styles/impressum.style'
 
 export const Impressum = () => {

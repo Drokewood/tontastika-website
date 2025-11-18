@@ -1,5 +1,5 @@
 import { ContactContainer, ContactFormContainer, TextContainer, StyledText, StyledContactFormTextContainer } from '../styles/Contact.style'
-import tosContent from '../tosContent'
+import tosContent from '../data/content/tosContent'
 import ContactForm from '../components/ContactForm'
 
 

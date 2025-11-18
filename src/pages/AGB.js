@@ -1,4 +1,4 @@
-import agbContent from '../agbContent'
+import agbContent from '../data/content/agbContent'
 import { AGBContainer, AGBTextContainer, StyleAGBText } from '../styles/agb.style'
 
 export const AGB = () => {
