@@ -21,36 +21,120 @@ Zentrale Sammlung aller gelernten Code-Konzepte mit Examples - nie wieder 3 Tage
 - Regular breaks to prevent overwhelm
 - Pair programming for accountability
 
-🛡️ BURNOUT PREVENTION:
-- Recognize euphoria as potential warning sign
-- "Too much enthusiasm" can lead to scope creep
-- Set boundaries: finish one project before starting another
-- Weekend breaks are NECESSARY, not optional
-
-💪 MOMENTUM vs SUSTAINABILITY:
-- Quality > Quantity in coding time
-- Consistent small wins build confidence
-- Celebrate progress, no matter how small
-- Trust the process - sustainable pace wins long-term
+### Terminal & File Management
 ```
+📁 ORDNER ERSTELLEN (PowerShell):
+mkdir src/data/images/HomeGalleryContent
+# Erstellt automatisch alle fehlenden Zwischenordner!
+# Existierende Ordner bleiben unverändert
 
-### Project Management Philosophy
-```
-🎯 FOCUS STRATEGY:
-1. Complete current project (Tontastika)
-2. Move to next logical evolution (Cocktail App with Next.js + AI)
-3. THEN experiment with additional languages/projects
-
-⚠️ SCOPE CREEP PREVENTION:
-- Recognize "too many ideas at once" pattern
-- One main project at a time
-- Document future ideas but don't start them
-- Euphoria can be dangerous - channel it wisely
+🚚 DATEIEN VERSCHIEBEN VS CODE DRAG & DROP:
+- Funktioniert zuverlässig für .js Files
+- Auto-Update von Import-Pfaden ✅
+- Perfekt für Content-Files und Data-Refactoring
 ```
 
 ---
 
 ## 🎨 **CSS**
+
+### **📐 CSS POSITION PROPERTIES**
+```css
+/* STATIC (Default) - Normal im Dokumentenfluss, wie Text in einem Buch
+[Element1] [Element2] [Element3] ← normal nebeneinander */
+
+/* RELATIVE - Relative to original position */  
+position: relative;
+top: 10px; left: 20px;
+/* Moves element BUT keeps original space reserved! */
+/* [Element1] [Element2-moved] [   space   ] [Element3] */
+
+/* ABSOLUTE - relativ zum Container, in dem es sich befindet */
+position: absolute;
+top: 50px; right: 30px;
+/* Element removed from flow, positioned relative to parent */
+/* [Element1] [Element3] ← Element2 floats somewhere else */
+/* Beispiel: Navbar bleibt oben im CONTAINER, scrollt mit der Seite weg! */
+
+
+/* FIXED - relativ zum Bildschirm */  
+position: fixed;
+top: 0; left: 0; right: 0; bottom: 0;  
+/* Navbar klebt am BILDSCHIRM, scrollt NICHT mit! */
+/* FIXED - klebt SOFORT fest */
+/* Navbar ist AB SOFORT immer oben sichtbar */
+
+/* STICKY - Hybrid: relative + fixed */
+position: sticky;
+top: 0;
+/* Acts relative until scroll position, then becomes fixed */
+/* STICKY - klebt erst fest WENN erreicht */
+/* Navbar scrollt erst normal mit, klebt dann oben fest wenn sie oben ankommt */
+```
+
+### **📦 FLEXBOX SYSTEM**
+```css
+/* Activate Flexbox Container, ohne diese Aktivierung hätten die anderen Alignments KEINEN Einfluß!*/
+display: flex;
+
+/* Horizontal Alignment */
+justify-content: flex-start;    /* [Items]          */
+justify-content: center;        /*   [Items]        */
+justify-content: flex-end;      /*          [Items] */
+justify-content: space-between; /* [Item]    [Item] */
+
+/* Vertical Alignment */
+align-items: flex-start;        /* Items at top */
+align-items: center;            /* Items centered */
+align-items: flex-end;          /* Items at bottom */
+
+/* IMPORTANT: display: flex does NOT include justify-content automatically! */
+```
+
+### **⚡ CSS ANIMATIONS**
+```css
+/* Animation Fill Modes */
+animation: myAnimation 0.3s ease-out forwards;
+
+/* FORWARDS - Stays at end state */
+/* Element: start → end → STAYS AT END ✅ */
+
+/* BACKWARDS - Returns to start state */  
+/* Element: start → end → JUMPS BACK TO START */
+
+/* both = Kombiniert diese Regeln: */
+/* - forwards: Bleibt am Ende stehen */
+/* - backwards: Wendet Startzustand vor Animation an */
+/* 1. Element hat schon VOR Animation den Startzustand */  
+/* 2. UND bleibt nach Animation im Endzustand */
+/* Praktisch: Selten gebraucht! forwards ist Standard! */
+
+/* TIMELINE: */
+/* Vor Start: Startzustand wird angewendet */
+/* Animation: 0% → 100% */  
+/* Nach Ende: Endzustand bleibt stehen */
+
+/* NONE - Only applies during animation time */
+
+/* Example Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to   { opacity: 1; transform: scale(1); }
+}
+```
+
+### **🎨 BACKDROP EFFECTS**
+```css
+/* Backdrop Filter - Effects BEHIND the element */
+backdrop-filter: blur(4px);           /* Blurs background */
+backdrop-filter: brightness(0.5);     /* Darkens background */
+backdrop-filter: contrast(1.5);       /* Increases contrast */
+backdrop-filter: saturate(2);         /* More vivid colors */
+
+/* Use Case: Modal overlays, frosted glass effects */
+```
+
+
 
 ### **📏 SPACING & UNITS**
 **`margin: 2rem`** - Außenabstand
@@ -80,6 +164,39 @@ align-items: center;      /* vertikal mittig */
 ---
 
 ## ⚛️ **REACT**
+
+### **🎯 EVENT HANDLING & EVENT OBJECTS**
+```javascript
+// Event Handler Function
+const handleClick = (e) => {  // 'e' = Event Object (JavaScript standard)
+    console.log(e.target);        // das gerade geklicke Event
+    console.log(e.currentTarget); // Element mit Eventlistener, also das beobachtete Element
+    console.log(e.type);          // 'click', 'keydown', etc.
+}
+
+// Modal Close Pattern - Click außerhalb des Bildes um es zu schließen
+const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+        onClose(); // Löst nur aus, wenn das Overlay geklickt wird und nicht das beobachtete Element
+    }
+    // Warum das funktioniert:
+    // currentTarget = LightboxOverlay (hat den Event Listener)
+    // target = was WIRKLICH geklickt wurde
+    // Gleich = Overlay geklickt → User will schließen
+    // Verschieden = Bild geklickt → User will NICHT schließen
+};
+
+// Props Destructuring
+const MyComponent = ({ isOpen, onClose, data }) => {
+    // Instead of: props.isOpen, props.onClose, props.data
+    // We destructure: { isOpen, onClose, data } = props
+}
+
+// Conditional Rendering
+if (!isOpen) return null;  // Don't render if closed
+`
+
+### **🔄 REACT HOOKS PATTERNS**
 
 ### **🔄 COMPONENT PATTERNS**
 **Array Mapping Pattern:**
