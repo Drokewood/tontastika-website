@@ -7,7 +7,7 @@ export const LightboxOverlay = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: ${props => props.theme.colors.overlayBackground || 'rgba(0, 0, 0, 0.8)'};
     backdrop-filter: blur(4px);
     z-index: 1000;
     display: flex;
@@ -31,9 +31,9 @@ export const LightboxModalContainer = styled.div`
     position: relative;
     max-width: 90vw;
     max-height: 90vh;
-    background-color: ${props => props.theme.pageBackground || '#f5f0ff'};
+    background-color: ${props => props.theme.colors.pageBackground || '#f5f0ff'};
     border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 40px ${props => props.theme.colors.shadowMedium || 'rgba(108, 63, 134, 0.4)'};
     padding: 20px;
     
     /* Scale animation */
@@ -67,8 +67,8 @@ export const CloseButton = styled.button`
     height: 40px;
     border: none;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.9);
-    color: #333;
+    background-color: ${props => props.theme.colors.button || '#b750f2'};
+    color: white;
     font-size: 24px;
     font-weight: bold;
     cursor: pointer;
@@ -85,7 +85,7 @@ export const CloseButton = styled.button`
     }
     
     &:focus {
-        outline: 2px solid ${props => props.theme.shadowMedium || '#b750f2'};
+        outline: 2px solid ${props => props.theme.colors.shadowMedium || '#b750f2'};
     }
 `;
 

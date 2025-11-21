@@ -30,6 +30,7 @@ const theme = {
     button: '#b750f2',
     buttonBackground: '#e7d8f0',
     pageBackground: '#f3e7f9', 
+    overlayBackground: 'rgba(72, 21, 102, 0.8)',
     fontColor: '#b750f2',
     // Neue Schatten-Farben für bessere Sichtbarkeit auf hellem Hintergrund
     shadowLight: 'rgba(183, 80, 242, 0.15)', 
