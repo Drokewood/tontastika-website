@@ -16,7 +16,7 @@ export const LightboxModal = ({ isOpen, imageUrl, imageAlt, onClose }) => {
             onClose();
         }
     };
-    
+
     return (
         <LightboxOverlay onClick={handleOverlayClick}>
             <LightboxModalContainer>

@@ -198,6 +198,51 @@ if (!isOpen) return null;  // Don't render if closed
 
 ### **🔄 REACT HOOKS PATTERNS**
 
+**useState Hook:**
+```javascript
+const [selectedImage, setSelectedImage] = React.useState(null);
+const [isLightboxOpen, setIsLightboxOpen] = React.useState(false);
+
+// legt Variablen an mit denen wir die Lightbox steuern können, eine um den Zustand das ausgewählte Bildes zu speichern und eine um den Zustand der Lightbox (offen/geschlossen) zu speichern
+const openLightbox = (image) => {
+    setSelectedImage(image);      
+    setIsLightboxOpen(true);      
+};
+```
+
+**useEffect Hook + Event Listeners:**
+```javascript
+// der useEffect muss explizit importiert werden, der reine React import reicht nicht aus
+import React, { useEffect } from "react";
+
+useEffect(() => {
+    // Setup: Event-Listener für ESC-Keyboard-Support
+    const handleKeyDown = (event) => {
+        if (event.key === 'Escape' && isLightboxOpen) {
+            setIsLightboxOpen(false);
+        }
+    };
+    
+    // Listener für GANZE SEITE hinzufügen (nicht nur Component!)
+    document.addEventListener('keydown', handleKeyDown);
+    
+    // Cleanup: Listener wieder entfernen (verhindert Memory Leaks!)
+    return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+    };
+    // DEPENDENCY ARRAY ERKLÄRUNG:
+    // [] (leer) = nur beim Mount/Unmount
+    // [state] = bei Mount + jedes Mal wenn sich state ändert  
+    // kein Array = bei jedem Re-Render (meist zu oft!)
+}, [isLightboxOpen]);
+
+// WARUM DEPENDENCY ARRAY?
+// - Performance-Optimierung
+// - Verhindert endlose Event-Listener-Erstellung
+// - Modal öffnet sich → Event-Listener erstellt
+// - Modal schließt sich → Event-Listener entfernt
+```
+
 ### **🔄 COMPONENT PATTERNS**
 **Array Mapping Pattern:**
 ```javascript
