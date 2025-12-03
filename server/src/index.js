@@ -10,7 +10,7 @@ dotenv.config();
 // macht es möglich Anfragen zu empfangen und Antworten zu senden(GET und POST requests)
 const app = express();
 // definiert den Port auf dem der Server läuft, entweder aus der Umgebungsvariable oder 5000 als Standardwert
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.SERVER_PORT || 5000;
 // die Reihenfolge der Middleware-Nutzung ist wichtig!
 // Middleware wird VON OBEN NACH UNTEN abgearbeitet
 // 1. CORS checken - app.use(cors()); 
