@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { runMigrations } from './runMigrations.js';
 
 // startet die Konfiguration aus der .env Datei, damit Umgebungsvariablen genutzt werden können
 // in der react.app ist diese Funktionalität bereits integriert, im Node.js Backend muss sie explizit gestartet werden
@@ -51,8 +52,23 @@ app.get('/api', (request, response) => {
   response.json({ message: 'Tontastika CMS API - Ready for authentication & uploads!' });
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-  console.log(`🏥 Health check: http://localhost:${PORT}/health`);
-});
+
+// --- hier geht es morgen weiter ---
+// Start server mit Migrations
+async function startServer() {
+  try {
+    // Erst Migrations ausführen
+    await runMigrations();
+    
+    // Dann Server starten
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on http://localhost:${PORT}`);
+      console.log(`🏥 Health check: http://localhost:${PORT}/health`);
+    });
+  } catch (error) {
+    console.error('💥 Server konnte nicht starten:', error.message);
+    process.exit(1); // Beendet den Prozess bei Fehler
+  }
+}
+
+startServer();
