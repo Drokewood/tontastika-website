@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import session from 'express-session';
 import { runMigrations } from './runMigrations.js';
 
 // startet die Konfiguration aus der .env Datei, damit Umgebungsvariablen genutzt werden können
@@ -31,6 +32,21 @@ app.use(cors({
 // Macht req.body verwendbar! Ohne das wäre req.body undefined oder ein String!
 app.use(express.json());
 
+// Session Management für Login-System
+// Muss NACH express.json() und VOR den Routes kommen
+app.use(session({
+  secret: process.env.SESSION_SECRET,        // Verschlüsselt Session-Cookies
+  // Session nur speichern wenn sich wirklich etwas geändert hat, um performance zu sparen  Wenn true wird jede Änderung, auch wenn es nur ein neu laden ist, als Änderung gespeichert
+  // so wird nur gespeichert wenn sich die Session ändert, also ein login oder logout stattfindet
+  resave: false,                             
+  saveUninitialized: false,                  // Leere Sessions NICHT speichern
+  cookie: { 
+    maxAge: 24 * 60 * 60 * 1000,            // 24 Stunden Gültigkeit
+    httpOnly: true,                          // Kein JavaScript-Zugriff (XSS-Schutz)
+    secure: false                            // true nur mit HTTPS (später in Production)
+  }
+}));
+
 // Health check endpoint - überprüft ob der Server läuft
 // Erreichbar unter: http://localhost:5000/health
 // Wird genutzt von: Docker, Monitoring-Tools, manuelle Tests
@@ -52,6 +68,24 @@ app.get('/api', (request, response) => {
   response.json({ message: 'Tontastika CMS API - Ready for authentication & uploads!' });
 });
 
+// Session Test Route - Verifiziert dass Sessions funktionieren
+// Erreichbar unter: http://localhost:5000/test/session
+app.get('/test/session', (request, response) => {
+  // Initialisiere View-Counter wenn noch nicht vorhanden
+  if (!request.session.viewCount) {
+    request.session.viewCount = 0;
+  }
+  
+  // Erhöhe Counter bei jedem Aufruf
+  request.session.viewCount++;
+  
+  response.json({
+    message: 'Session Test erfolgreich!',
+    viewCount: request.session.viewCount,
+    sessionID: request.sessionID,
+    info: 'Wenn viewCount bei jedem Reload hochgeht = Sessions funktionieren! ✅'
+  });
+});
 
 // --- hier geht es morgen weiter ---
 // Start server mit Migrations
