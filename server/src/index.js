@@ -1,8 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import authRoute from './routes/auth.js';
 import session from 'express-session';
 import { runMigrations } from './runMigrations.js';
+
+// die index des Servers ist quasi das Gegenstück zur App.js in der App, es definiert die Funktionen des Servers
 
 // startet die Konfiguration aus der .env Datei, damit Umgebungsvariablen genutzt werden können
 // in der react.app ist diese Funktionalität bereits integriert, im Node.js Backend muss sie explizit gestartet werden
@@ -46,6 +49,9 @@ app.use(session({
     secure: false                            // true nur mit HTTPS (später in Production)
   }
 }));
+
+// Auth Routes - Login/Logout System
+app.use('/auth', authRoute);
 
 // Health check endpoint - überprüft ob der Server läuft
 // Erreichbar unter: http://localhost:5000/health
