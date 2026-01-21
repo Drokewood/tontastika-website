@@ -8,15 +8,7 @@ services:
     container_name: tontastika_mysql
     restart: unless-stopped
     env_file:
-      - ./server/.env
-    # Hier wird beim erstellen der Datenbank der Root User und eine Datenbank definiert
-    # Die Variablen werden aus der .env Datei geladen
-    # Diese Daten sind für einen User, es dürfen also keine doppelten Variablen vergeben werden 
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      - server/.env
     ports:
       - "3306:3306"
     volumes:
@@ -32,7 +24,7 @@ services:
     container_name: tontastika_app
     restart: unless-stopped
     env_file:
-      - ./server/.env
+      - server/.env
     environment:
     # db ist hier kein Variablenname sondern der name des MySQL Services im Docker-Compose Netzwerk
       MYSQL_HOST: db
