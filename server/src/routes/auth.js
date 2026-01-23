@@ -1,5 +1,6 @@
 import express from 'express';
 import mysql from 'mysql2/promise';
+import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 
 // Lade Umgebungsvariablen für DB-Zugriff
@@ -12,7 +13,7 @@ const router = express.Router();
 // das async erlaubt die Nutzung von await innerhalb der Funktion, ohne dieses Keyword würde await einen Fehler werfen
 // also brauchen wir async um die Erlaubnis einzuholen von Javascript um einen await ausführen zu können und await pausiert die Funktion und holt daten vom Server
 router.post('/login', async (request, response) => {
-  // Extrahiere Email und Password aus dem Request-Body
+  // Extrahiere Email und Password aus dem Request-Body, also die eingegebenen Daten und speichert sie in Variablen
   const { email, password } = request.body;
   
   // VALIDIERUNG 1: Prüfen ob beide Felder vorhanden sind
@@ -29,7 +30,7 @@ router.post('/login', async (request, response) => {
     });
   }
   
-  // MICRO-TASK #6: Database User Lookup
+  // Database User Lookup
   let connection;
   
   try {
@@ -60,11 +61,22 @@ router.post('/login', async (request, response) => {
     const user = rows[0];
     console.log('✅ User gefunden:', user.email, 'Rolle:', user.role);
     
-    // Später (Task #7): bcrypt.compare(password, user.password_hash)
+    // MICRO-TASK #7: Passwort überprüfen
+    // bcrypt.compare hashed das Klartextpasswort aus der Eingabe und vergleicht das Ergebnis mit dem in der DB gehashten Passwort
+    const isPasswordCorrect = await bcrypt.compare(password, user.password_hash);
+    
+    if (!isPasswordCorrect) {
+      return response.status(401).json({ 
+        error: 'Ungültige Anmeldedaten' 
+      });
+    }
+    
+    console.log('✅ Passwort korrekt!');
+    
     // Später (Task #8): req.session.userId = user.id
     
     response.json({ 
-      message: 'User existiert in Datenbank!',
+      message: 'Login erfolgreich!',
       email: user.email,
       role: user.role
     });
