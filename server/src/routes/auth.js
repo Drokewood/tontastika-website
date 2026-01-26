@@ -15,7 +15,9 @@ const router = express.Router();
 router.post('/login', async (request, response) => {
   // Extrahiere Email und Password aus dem Request-Body, also die eingegebenen Daten und speichert sie in Variablen
   const { email, password } = request.body;
-  
+
+  // sollte eine Validierung fehlschlagen, wird die Funktion mit return beendet und eine Fehlermeldung zurückgegeben
+  // es würden also keine Verbindung aufgebaut werden, und keine Daten gestohlen werden können
   // VALIDIERUNG 1: Prüfen ob beide Felder vorhanden sind
   if (!email || !password) {
     return response.status(400).json({ 
@@ -72,8 +74,18 @@ router.post('/login', async (request, response) => {
     }
     
     console.log('✅ Passwort korrekt!');
-    
-    // Später (Task #8): req.session.userId = user.id
+
+    // Session-Daten setzen
+    // user.id und user.role sind die Daten, die aus der DB geholt wurden
+    // request.session ist das Session-Objekt, das durch das express-session Middleware bereitgestellt wird
+    // Hier speichern wir die User-ID und Rolle in der Session, damit wir sie später für Authentifizierung und Autorisierung verwenden können
+
+    // die eigentliche Arbeit erledigt express session, dieses Objekt wird mit einem Setter und Getter versehen
+    // schon während des Schreibens registriert der Setter Änderungen und markiert die Session als "dirty", also verändert
+    // Nach dem response speichert der Setter die Änderungen im Session Store 
+  
+    request.session.userId = user.id;
+    request.session.role = user.role;
     
     response.json({ 
       message: 'Login erfolgreich!',
@@ -91,6 +103,28 @@ router.post('/login', async (request, response) => {
     if (connection) {
       await connection.end();
     }
+  }
+});
+
+// TEST-ENDPOINT: Session überprüfen
+// Dieser Endpoint prüft ob ein User eingeloggt ist (Session existiert)
+// Browser sendet Cookie automatisch mit → express-session lädt Session-Daten
+
+// /me ist die route die wir aufrufen um zu prüfen ob der user eingeloggt ist
+router.get('/me', (request, response) => {
+  // Prüfen ob userId in Session vorhanden ist
+  if (request.session.userId) {
+    // Session existiert! User ist eingeloggt
+    response.json({
+      loggedIn: true,
+      userId: request.session.userId,
+      role: request.session.role
+    });
+  } else {
+    // Keine Session → User ist NICHT eingeloggt
+    response.json({ 
+      loggedIn: false 
+    });
   }
 });
 
