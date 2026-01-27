@@ -32,13 +32,20 @@ router.post('/login', async (request, response) => {
     });
   }
   
-  // Database User Lookup
+  // Database User Lookup, wird erst erstellt wenn die Validierungen erfolgreich sind
   let connection;
   
   try {
     // Verbindung zur Datenbank herstellen
     // await bedeutet, dass der Code hier wartet bis die Verbindung hergestellt ist, bevor es weiter geht
     connection = await mysql.createConnection({
+      // das geschieht NACH der validierung, die Logindaten die nun folgen, haben nichts mit den validierungsdaten zu tun, die vom Webseitennnutzer kommen
+      // der connection block sagt nach der validierung, cool ich darf rein 
+      // und baut eine connection zur db auf. 
+      // ich will auf die db, die bei 'Host', also unserem Server liegt, bzw im Docker Container
+      // für den 'user' in mysql (tontastika_user)
+      // mit dem 'password' für das mysql(damit ich auch da hinneinkomme)
+      // und der 'database' name (damit ich weiß wo ich eigentlich nach Daten suchen will)
       host: process.env.MYSQL_HOST || 'localhost',
       user: process.env.MYSQL_USER || 'root',
       password: process.env.MYSQL_PASSWORD,
@@ -59,8 +66,9 @@ router.post('/login', async (request, response) => {
       });
     }
     
-    // User gefunden!
+    // User gefunden, die Daten aus der DB sind in rows[0] und werden in user gespeichert
     const user = rows[0];
+    // TODO: VOR PRODUCTION: Email aus Log entfernen oder auf process.env.NODE_ENV === 'development' prüfen
     console.log('✅ User gefunden:', user.email, 'Rolle:', user.role);
     
     // MICRO-TASK #7: Passwort überprüfen
@@ -79,14 +87,16 @@ router.post('/login', async (request, response) => {
     // user.id und user.role sind die Daten, die aus der DB geholt wurden
     // request.session ist das Session-Objekt, das durch das express-session Middleware bereitgestellt wird
     // Hier speichern wir die User-ID und Rolle in der Session, damit wir sie später für Authentifizierung und Autorisierung verwenden können
-
+    // --------------------------------------------------------------
     // die eigentliche Arbeit erledigt express session, dieses Objekt wird mit einem Setter und Getter versehen
     // schon während des Schreibens registriert der Setter Änderungen und markiert die Session als "dirty", also verändert
     // Nach dem response speichert der Setter die Änderungen im Session Store 
-  
     request.session.userId = user.id;
     request.session.role = user.role;
     
+    // Antwort an den Client, also das Frontend senden (ohne Passwort)
+    // um die Daten im Client anzeigen und weiter verarbeiten zu können
+    // die role ist zum Beispiel wichtig um zu wissen ob der User Admin Rechte hat oder nicht
     response.json({ 
       message: 'Login erfolgreich!',
       email: user.email,
@@ -106,10 +116,25 @@ router.post('/login', async (request, response) => {
   }
 });
 
+router.post('/logout', (request, response) => {
+  // Session einreißen, um den User auszuloggen
+  // ein Callback ist eine Funktion die SPÄTER ausgeführt wird
+  // destroy() ist asynchron: löscht Session im Hintergrund, ruft dann den Callback auf
+  // Der Callback bekommt (err) als Parameter: null bei Erfolg, Error-Objekt bei Fehler
+  request.session.destroy((err) => {
+    if (err) {
+      return response.status(500).json({ 
+        error: 'Fehler beim Ausloggen' 
+      });
+    }
+    response.json({ message: 'Logout erfolgreich!' });
+  });
+});
+
 // TEST-ENDPOINT: Session überprüfen
 // Dieser Endpoint prüft ob ein User eingeloggt ist (Session existiert)
 // Browser sendet Cookie automatisch mit → express-session lädt Session-Daten
-
+// -----------------------------------------------
 // /me ist die route die wir aufrufen um zu prüfen ob der user eingeloggt ist
 router.get('/me', (request, response) => {
   // Prüfen ob userId in Session vorhanden ist
