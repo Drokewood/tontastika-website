@@ -13,6 +13,14 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+    # prüft alle 5 Sekunden(interval) ob die DB erreichbar ist, bis sie als "healthy" gilt, also erreichbar ist.
+    # dies wird 5 mal (retries) versucht. Jeder dieser Healthtest läuft für 3 Sekunden(timeout).
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 30s
     networks:
       - tontastika_network
 
@@ -35,7 +43,8 @@ services:
       - /app/node_modules
       - uploads_data:/app/uploads
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     networks:
       - tontastika_network
 
