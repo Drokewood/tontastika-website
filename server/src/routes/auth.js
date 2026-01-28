@@ -9,6 +9,51 @@ dotenv.config();
 
 const router = express.Router();
 
+// =============================================================================
+// MIDDLEWARE FUNCTIONS - Schutz für geschützte Routen
+// =============================================================================
+
+// Middleware: Prüft ob User eingeloggt ist
+export const requireAuth = (request, response, next) => {
+  // Prüfe ob Session existiert UND userId gesetzt ist
+  if (!request.session || !request.session.userId) {
+    return response.status(401).json({ 
+      error: 'Nicht eingeloggt',
+      message: 'Bitte zuerst einloggen' 
+    });
+  }
+  
+  // Session existiert → User ist eingeloggt → weiter zur nächsten Funktion
+  next();
+};
+
+// Middleware: Prüft ob User Admin-Rolle hat
+// Nutzt requireAuth-Logik + zusätzliche Rollen-Prüfung
+export const requireAdmin = (request, response, next) => {
+  // Erst prüfen ob überhaupt eingeloggt
+  if (!request.session || !request.session.userId) {
+    return response.status(401).json({ 
+      error: 'Nicht eingeloggt',
+      message: 'Bitte zuerst einloggen' 
+    });
+  }
+  
+  // Dann prüfen ob Admin-Rolle
+  if (request.session.role !== 'admin') {
+    return response.status(403).json({ 
+      error: 'Keine Berechtigung',
+      message: 'Nur Admins haben Zugriff auf diese Funktion' 
+    });
+  }
+  
+  // User ist eingeloggt UND Admin → weiter
+  next();
+};
+
+// =============================================================================
+// AUTH ROUTES - Login, Logout, Session-Check
+// =============================================================================
+
 // diese Funktion ist erreichbar unter /auth/login und wird ausgeführt, wenn eine POST Anfrage an diese Route geschickt wird
 // das async erlaubt die Nutzung von await innerhalb der Funktion, ohne dieses Keyword würde await einen Fehler werfen
 // also brauchen wir async um die Erlaubnis einzuholen von Javascript um einen await ausführen zu können und await pausiert die Funktion und holt daten vom Server
@@ -151,6 +196,29 @@ router.get('/me', (request, response) => {
       loggedIn: false 
     });
   }
+});
+
+// =============================================================================
+// PROTECTED ROUTES - Beispiele für geschützte Routen
+// =============================================================================
+
+// TEST: Geschützte Route (nur eingeloggte User)
+// Verwendung: requireAuth als zweiter Parameter = Middleware läuft VOR dem Handler(der Arrow Funktion)
+router.get('/protected', requireAuth, (request, response) => {
+  response.json({ 
+    message: 'Du bist eingeloggt!',
+    userId: request.session.userId,
+    email: request.session.email 
+  });
+});
+
+// TEST: Admin-geschützte Route (nur Admins)
+router.get('/admin-only', requireAdmin, (request, response) => {
+  response.json({ 
+    message: 'Admin-Bereich!',
+    userId: request.session.userId,
+    role: request.session.role 
+  });
 });
 
 export default router;

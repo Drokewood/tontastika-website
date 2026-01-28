@@ -44,6 +44,8 @@ services:
       - uploads_data:/app/uploads
     depends_on:
       db:
+      # Wartet bis der DB Service als "healthy" gilt bevor der App Service gestartet wird
+      # service_healthy ist ein keyword von Docker-Compose um auf den Healthcheck Status zuzugreifen
         condition: service_healthy
     networks:
       - tontastika_network
