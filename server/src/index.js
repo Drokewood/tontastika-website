@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import authRoute from './routes/auth.js';
 import session from 'express-session';
 import { runMigrations } from './runMigrations.js';
+import upload from './config/multer.js';
 
 // die index des Servers ist quasi das Gegenstück zur App.js in der App, es definiert die Funktionen des Servers
 
