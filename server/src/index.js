@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoute from './routes/auth.js';
+import imagesRoute from './routes/images.js';
 import session from 'express-session';
 import { runMigrations } from './runMigrations.js';
 import upload from './config/multer.js';
@@ -21,10 +22,11 @@ const PORT = process.env.SERVER_PORT || 5000;
 // Middleware wird VON OBEN NACH UNTEN abgearbeitet
 // 1. CORS checken - app.use(cors()); 
 // 2. JSON parsen - app.use(express.json()); 
-// 3. Route handler - app.get('/api', ...); 
+// 3. Session-Management - app.use(session(...));
+// 4. Route handler - app.get('/api', ...); 
 
 // Middleware - Filter für eingehende Anfragen
-// app.use() fügt Middleware-Funktionen hinzu, die auf jede request angewendet werden
+// app.use() fügt Middleware-Funktionen hinzu, die auf jede request angewendet wird
 app.use(cors({
   // erlaubt Anfragen von der angegebenen Client-URL, standardmäßig localhost:3000
   origin: process.env.CLIENT_URL || 'http://localhost:3000',
@@ -51,9 +53,6 @@ app.use(session({
   }
 }));
 
-// Auth Routes - Login/Logout System
-app.use('/auth', authRoute);
-
 // Health check endpoint - überprüft ob der Server läuft
 // Erreichbar unter: http://localhost:5000/health
 // Wird genutzt von: Docker, Monitoring-Tools, manuelle Tests
@@ -71,9 +70,17 @@ app.get('/health', (request, response) => {
 });
 
 // API routes placeholder
+// definiert nur eine einzelne Route
+// Diese Route benötigt keine Middleware (z.B. Session), daher kann sie direkt hier definiert werden
+// Im Gegensatz zu app.use() die ganze Router-Module laden würde
 app.get('/api', (request, response) => {
   response.json({ message: 'Tontastika CMS API - Ready for authentication & uploads!' });
 });
+
+// Routes registrieren
+// Alle Routen, die mit /auth beginnen, werden von authRoute behandelt, hier werden also mehrere Routen definiert, zum Beispiel /auth/login, /auth/logout, /auth/me
+app.use('/auth', authRoute);
+app.use('/api/images', imagesRoute);
 
 // Session Test Route - Verifiziert dass Sessions funktionieren
 // Erreichbar unter: http://localhost:5000/test/session
