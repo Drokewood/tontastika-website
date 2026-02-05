@@ -25,11 +25,12 @@ server/.env
 .env.production.local
 
 # Personal development notes
-COPILOT_MEMORY_TRANSFER.md
-TODO_BACKUP.md
 LEARNING_BACKUP.md
-Profile.md
+MEMORY.md
 docs/CMS_PLAN.md
+MIND.md
+Profile.md
+TODO_BACKUP.md
 
 npm-debug.log*
 yarn-debug.log*
